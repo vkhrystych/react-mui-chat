@@ -5,6 +5,34 @@
   "license": "MIT",
   "repository": "vladyslavkhrystych/react-mui-chat",
   "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "^4.6.0",
+    "@material-ui/styles": "^4.6.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "keywords": [
     "react",
     "chat",
