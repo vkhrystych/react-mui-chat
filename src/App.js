@@ -19,9 +19,10 @@ const styles = {
     background: "#f9f9f9"
   },
   contacts: {
-    display: "flex",
-    flexDirection: "column",
     width: "300px",
+    display: "flex",
+    overflowY: "auto",
+    flexDirection: "column",
     borderRight: "1px solid #cecece"
   }
 };
