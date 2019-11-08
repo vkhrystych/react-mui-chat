@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/styles";
 
 import {
-  Avatar,
   List,
+  Badge,
+  Avatar,
   ListItem,
   ListItemText,
   ListItemAvatar
@@ -134,8 +135,6 @@ const contacts = [
 ];
 
 const Contact = ({ contact }) => {
-  console.log(contact);
-
   return (
     <ListItem button>
       <ListItemAvatar>
@@ -149,10 +148,15 @@ const Contact = ({ contact }) => {
           style: {
             whiteSpace: "nowrap",
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
+            width: "calc(100% - 12px)"
           }
         }}
       />
+
+      {contact.msgCount ? (
+        <Badge badgeContent={contact.msgCount} color="secondary"></Badge>
+      ) : null}
     </ListItem>
   );
 };
