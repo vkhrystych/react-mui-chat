@@ -1,0 +1,15 @@
+{
+  "name": "react-mui-chat",
+  "version": "0.0.0",
+  "description": "React chat component, based on Material-UI framework",
+  "license": "MIT",
+  "repository": "vladyslavkhrystych/react-mui-chat",
+  "main": "index.js",
+  "keywords": [
+    "react",
+    "chat",
+    "material-ui",
+    "mui",
+    "javascript"
+  ]
+}
