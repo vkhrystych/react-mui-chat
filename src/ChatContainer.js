@@ -191,7 +191,9 @@ class ChatContainer extends Component {
                     <div
                       key={msgIndex}
                       style={{
-                        marginBottom: `${lastMsg ? "10px" : "4px"}`
+                        marginBottom: `${
+                          !nextMsg ? "0" : lastMsg ? "10px" : "4px"
+                        }`
                       }}
                       className={`${classes.msg} ${
                         msg.incoming ? classes.msgIncoming : ""
