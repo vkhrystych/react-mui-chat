@@ -2,16 +2,18 @@ import React, { Component } from "react";
 
 import { withStyles } from "@material-ui/styles";
 
-import { contacts } from "./mock-data";
-
 import {
   List,
   Badge,
   Avatar,
   ListItem,
+  TextField,
   ListItemText,
   ListItemAvatar
 } from "@material-ui/core";
+
+import sendIcon from "./assets/send.svg";
+const primaryColor = "#2196f3";
 
 const styles = {
   container: {
@@ -29,25 +31,32 @@ const styles = {
   },
   selectedContact: {
     color: "#fff",
-    background: "#2196f3",
+    background: primaryColor,
     "& .MuiTypography-colorTextSecondary": {
       color: "#fff"
     }
   },
-  chat: {
+  chatContainer: {
     width: "100%",
+    display: "flex",
+    flexDirection: "column"
+  },
+  chat: {
+    height: "100%",
     display: "flex",
     padding: "10px",
     overflowY: "auto",
     background: "#f9f9f9",
-    flexDirection: "column"
+    flexDirection: "column",
+    boxShadow:
+      "inset 0px 10px 8px -10px rgba(214, 214, 214, 0.7), inset 0px -10px 8px -10px rgba(214, 214, 214, 0.7)"
   },
   msg: {
     color: "white",
     fontSize: "15px",
     maxWidth: "45%",
-    padding: "8px 15px",
-    borderRadius: "20px",
+    padding: "5px 8px",
+    borderRadius: "5px",
     marginBottom: "10px",
     position: "relative",
     alignSelf: "flex-end",
@@ -59,6 +68,23 @@ const styles = {
     background: "#eee",
     color: "#000",
     alignSelf: "flex-start"
+  },
+  sendMsgContainer: {
+    display: "flex",
+    padding: "10px",
+    alignItems: "center",
+    border: "1px solid #cecece"
+  },
+  sendMsgBtn: {
+    fill: "red",
+    width: "20px",
+    height: "20px",
+    flexShrink: "0",
+    marginLeft: "10px",
+    background: `url(${sendIcon})`,
+    "&:hover": {
+      cursor: "pointer"
+    }
   }
 };
 
@@ -94,6 +120,10 @@ const Contact = ({ contact, contactIndex, classes, isSelected, onClick }) => {
 };
 
 class ChatContainer extends Component {
+  state = {
+    inputMsg: ""
+  };
+
   componentDidMount = () => {
     this.scrollToBottom();
   };
@@ -102,8 +132,11 @@ class ChatContainer extends Component {
     this.messagesEnd.scrollIntoView();
   };
 
+  onInputMsgChange = inputMsg => this.setState({ inputMsg });
+
   render() {
-    const { classes, selectedContact, onContactClick } = this.props;
+    const { inputMsg } = this.state;
+    const { classes, contacts, selectedContact, onContactClick } = this.props;
 
     return (
       <section className={classes.container}>
@@ -124,29 +157,45 @@ class ChatContainer extends Component {
           })}
         </List>
 
-        <div className={classes.chat}>
-          {selectedContact &&
-          selectedContact.messages &&
-          selectedContact.messages.length
-            ? selectedContact.messages.map((msg, msgIndex) => {
-                return (
-                  <div
-                    key={msgIndex}
-                    className={`${classes.msg} ${
-                      msg.incoming ? classes.msgIncoming : ""
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
-                );
-              })
-            : null}
+        <div className={classes.chatContainer}>
+          <div className={classes.chat}>
+            {selectedContact &&
+            selectedContact.messages &&
+            selectedContact.messages.length
+              ? selectedContact.messages.map((msg, msgIndex) => {
+                  return (
+                    <div
+                      key={msgIndex}
+                      className={`${classes.msg} ${
+                        msg.incoming ? classes.msgIncoming : ""
+                      }`}
+                    >
+                      {msg.text}
+                    </div>
+                  );
+                })
+              : null}
 
-          <div
-            ref={el => {
-              this.messagesEnd = el;
-            }}
-          />
+            <div
+              ref={el => {
+                this.messagesEnd = el;
+              }}
+            />
+          </div>
+
+          <div className={classes.sendMsgContainer}>
+            <TextField
+              rows="2"
+              fullWidth
+              multiline
+              rowsMax="10"
+              value={inputMsg}
+              placeholder="Enter your message"
+              onChange={e => this.onInputMsgChange(e.target.value)}
+            />
+
+            <div className={classes.sendMsgBtn} />
+          </div>
         </div>
       </section>
     );

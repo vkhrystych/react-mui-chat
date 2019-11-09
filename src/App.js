@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import ChatContainer from "./ChatContainer";
 
-import { messages } from "./mock-data";
+import { messages, contacts } from "./mock-data";
 
 class App extends Component {
   state = {
@@ -22,6 +22,7 @@ class App extends Component {
     return (
       <div>
         <ChatContainer
+          contacts={contacts}
           selectedContact={selectedContact}
           onContactClick={this.onContactClick}
         />
