@@ -2,15 +2,10 @@ import React, { Component } from "react";
 
 import { withStyles } from "@material-ui/styles";
 
-import {
-  List,
-  Badge,
-  Avatar,
-  ListItem,
-  TextField,
-  ListItemText,
-  ListItemAvatar
-} from "@material-ui/core";
+import Contact from "./components/Contact";
+import Message from "./components/Message";
+
+import { List, TextField } from "@material-ui/core";
 
 import sendIcon from "./assets/send.svg";
 const primaryColor = "#2196f3";
@@ -106,58 +101,6 @@ const styles = {
       cursor: "pointer"
     }
   }
-};
-
-const Contact = ({ contact, contactIndex, classes, isSelected, onClick }) => {
-  return (
-    <ListItem
-      className={`${isSelected ? classes.selectedContact : ""}`}
-      button
-      onClick={() => onClick(contactIndex)}
-    >
-      <ListItemAvatar>
-        <Avatar alt={contact.name} src={contact.avatar} />
-      </ListItemAvatar>
-
-      <ListItemText
-        primary={contact.name}
-        secondary={contact.msg}
-        secondaryTypographyProps={{
-          style: {
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            width: "calc(100% - 12px)"
-          }
-        }}
-      />
-
-      {contact.msgCount ? (
-        <Badge badgeContent={contact.msgCount} color="secondary"></Badge>
-      ) : null}
-    </ListItem>
-  );
-};
-
-const Message = ({ msg, isNextMsg, lastMsg, classes }) => {
-  return (
-    <div
-      style={{
-        marginBottom: `${!isNextMsg ? "0" : lastMsg ? "10px" : "4px"}`
-      }}
-      className={`${classes.msg} ${msg.incoming ? classes.msgIncoming : ""}`}
-    >
-      {lastMsg ? (
-        <div
-          className={`${
-            msg.incoming ? classes.lastMsgIncoming : classes.lastMsgOutcoming
-          }`}
-        ></div>
-      ) : null}
-
-      {msg.text}
-    </div>
-  );
 };
 
 class ChatContainer extends Component {
