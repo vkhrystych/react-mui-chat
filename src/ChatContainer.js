@@ -139,6 +139,27 @@ const Contact = ({ contact, contactIndex, classes, isSelected, onClick }) => {
   );
 };
 
+const Message = ({ msg, isNextMsg, lastMsg, classes }) => {
+  return (
+    <div
+      style={{
+        marginBottom: `${!isNextMsg ? "0" : lastMsg ? "10px" : "4px"}`
+      }}
+      className={`${classes.msg} ${msg.incoming ? classes.msgIncoming : ""}`}
+    >
+      {lastMsg ? (
+        <div
+          className={`${
+            msg.incoming ? classes.lastMsgIncoming : classes.lastMsgOutcoming
+          }`}
+        ></div>
+      ) : null}
+
+      {msg.text}
+    </div>
+  );
+};
+
 class ChatContainer extends Component {
   state = {
     inputMsg: ""
@@ -188,28 +209,13 @@ class ChatContainer extends Component {
                     !nextMsg || (nextMsg && msg.incoming !== nextMsg.incoming);
 
                   return (
-                    <div
+                    <Message
+                      msg={msg}
                       key={msgIndex}
-                      style={{
-                        marginBottom: `${
-                          !nextMsg ? "0" : lastMsg ? "10px" : "4px"
-                        }`
-                      }}
-                      className={`${classes.msg} ${
-                        msg.incoming ? classes.msgIncoming : ""
-                      }`}
-                    >
-                      {lastMsg ? (
-                        <div
-                          className={`${
-                            msg.incoming
-                              ? classes.lastMsgIncoming
-                              : classes.lastMsgOutcoming
-                          }`}
-                        ></div>
-                      ) : null}
-                      {msg.text}
-                    </div>
+                      classes={classes}
+                      lastMsg={lastMsg}
+                      isNextMsg={nextMsg}
+                    />
                   );
                 })
               : null}
