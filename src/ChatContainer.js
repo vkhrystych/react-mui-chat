@@ -57,13 +57,12 @@ const styles = {
     maxWidth: "45%",
     padding: "5px 8px",
     borderRadius: "5px",
-    marginBottom: "10px",
     position: "relative",
     alignSelf: "flex-end",
     display: "inline-flex",
     borderBottomRightRadius: "0",
     backgroundAttachment: "fixed",
-    background: "#00B8E2"
+    background: primaryColor
   },
   msgIncoming: {
     background: "#eee",
@@ -89,7 +88,7 @@ const styles = {
     position: "absolute",
     borderStyle: "solid",
     borderWidth: "15px 0 0px 16px",
-    borderColor: "transparent transparent transparent #00B8E2"
+    borderColor: `transparent transparent transparent ${primaryColor}`
   },
   sendMsgContainer: {
     display: "flex",
@@ -98,7 +97,6 @@ const styles = {
     border: "1px solid #cecece"
   },
   sendMsgBtn: {
-    fill: "red",
     width: "20px",
     height: "20px",
     flexShrink: "0",
@@ -192,6 +190,9 @@ class ChatContainer extends Component {
                   return (
                     <div
                       key={msgIndex}
+                      style={{
+                        marginBottom: `${lastMsg ? "10px" : "4px"}`
+                      }}
                       className={`${classes.msg} ${
                         msg.incoming ? classes.msgIncoming : ""
                       }`}
