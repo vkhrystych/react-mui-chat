@@ -15,12 +15,12 @@ const styles = {
   container: {
     display: "flex",
     height: "100vh",
-    overflow: "hidden",
-    background: "#f9f9f9"
+    overflow: "hidden"
   },
   contacts: {
     width: "300px",
     display: "flex",
+    flexShrink: "0",
     overflowY: "auto",
     flexDirection: "column",
     borderRight: "1px solid #cecece"
@@ -31,6 +31,32 @@ const styles = {
     "& .MuiTypography-colorTextSecondary": {
       color: "#fff"
     }
+  },
+  chat: {
+    width: "100%",
+    display: "flex",
+    padding: "10px",
+    overflowY: "auto",
+    background: "#f9f9f9",
+    flexDirection: "column"
+  },
+  msg: {
+    color: "white",
+    fontSize: "15px",
+    maxWidth: "45%",
+    padding: "8px 15px",
+    borderRadius: "20px",
+    marginBottom: "10px",
+    position: "relative",
+    alignSelf: "flex-end",
+    display: "inline-flex",
+    backgroundAttachment: "fixed",
+    background: "linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%)"
+  },
+  msgIncoming: {
+    background: "#eee",
+    color: "#000",
+    alignSelf: "flex-start"
   }
 };
 
@@ -174,6 +200,14 @@ const Contact = ({ contact, contactIndex, classes, isSelected, onClick }) => {
 };
 
 class ChatContainer extends Component {
+  componentDidMount = () => {
+    this.scrollToBottom();
+  };
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView();
+  };
+
   render() {
     const { classes, selectedContact, onContactClick } = this.props;
 
@@ -181,7 +215,7 @@ class ChatContainer extends Component {
       <section className={classes.container}>
         <List className={classes.contacts}>
           {contacts.map((contact, contactIndex) => {
-            const isSelected = selectedContact === contactIndex;
+            const isSelected = selectedContact.index === contactIndex;
 
             return (
               <Contact
@@ -196,7 +230,30 @@ class ChatContainer extends Component {
           })}
         </List>
 
-        <div className={classes.chat}></div>
+        <div className={classes.chat}>
+          {selectedContact &&
+          selectedContact.messages &&
+          selectedContact.messages.length
+            ? selectedContact.messages.map((msg, msgIndex) => {
+                return (
+                  <div
+                    key={msgIndex}
+                    className={`${classes.msg} ${
+                      msg.incoming ? classes.msgIncoming : ""
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                );
+              })
+            : null}
+
+          <div
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+        </div>
       </section>
     );
   }
