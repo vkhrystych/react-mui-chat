@@ -44,7 +44,7 @@ const styles = {
   chat: {
     height: "100%",
     display: "flex",
-    padding: "10px",
+    padding: "20px",
     overflowY: "auto",
     background: "#f9f9f9",
     flexDirection: "column",
@@ -61,13 +61,35 @@ const styles = {
     position: "relative",
     alignSelf: "flex-end",
     display: "inline-flex",
+    borderBottomRightRadius: "0",
     backgroundAttachment: "fixed",
-    background: "linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%)"
+    background: "#00B8E2"
   },
   msgIncoming: {
     background: "#eee",
     color: "#000",
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    borderBottomLeftRadius: "0"
+  },
+  lastMsgIncoming: {
+    width: "0",
+    height: "0",
+    left: "-10px",
+    bottom: "0px",
+    borderStyle: "solid",
+    position: "absolute",
+    borderWidth: "15px 15px 0px 0px",
+    borderColor: "transparent #eee transparent transparent"
+  },
+  lastMsgOutcoming: {
+    width: "0",
+    height: "0",
+    right: "-10px",
+    bottom: "0px",
+    position: "absolute",
+    borderStyle: "solid",
+    borderWidth: "15px 0 0px 16px",
+    borderColor: "transparent transparent transparent #00B8E2"
   },
   sendMsgContainer: {
     display: "flex",
@@ -163,6 +185,10 @@ class ChatContainer extends Component {
             selectedContact.messages &&
             selectedContact.messages.length
               ? selectedContact.messages.map((msg, msgIndex) => {
+                  const nextMsg = selectedContact.messages[msgIndex + 1];
+                  const lastMsg =
+                    !nextMsg || (nextMsg && msg.incoming !== nextMsg.incoming);
+
                   return (
                     <div
                       key={msgIndex}
@@ -170,6 +196,15 @@ class ChatContainer extends Component {
                         msg.incoming ? classes.msgIncoming : ""
                       }`}
                     >
+                      {lastMsg ? (
+                        <div
+                          className={`${
+                            msg.incoming
+                              ? classes.lastMsgIncoming
+                              : classes.lastMsgOutcoming
+                          }`}
+                        ></div>
+                      ) : null}
                       {msg.text}
                     </div>
                   );
