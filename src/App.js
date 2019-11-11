@@ -16,6 +16,12 @@ class App extends Component {
     this.setState({ selectedContact: contactIndex });
   };
 
+  onSendBtnClick = (e, msg) => {
+    e.preventDefault();
+
+    console.log(msg);
+  };
+
   render() {
     const { selectedContact } = this.state;
 
@@ -25,6 +31,7 @@ class App extends Component {
           contacts={contacts}
           selectedContact={selectedContact}
           onContactClick={this.onContactClick}
+          onSendBtnClick={this.onSendBtnClick}
         />
       </div>
     );

@@ -120,7 +120,13 @@ class ChatContainer extends Component {
 
   render() {
     const { inputMsg } = this.state;
-    const { classes, contacts, selectedContact, onContactClick } = this.props;
+    const {
+      classes,
+      contacts,
+      selectedContact,
+      onContactClick,
+      onSendBtnClick
+    } = this.props;
 
     return (
       <section className={classes.container}>
@@ -181,7 +187,10 @@ class ChatContainer extends Component {
               onChange={e => this.onInputMsgChange(e.target.value)}
             />
 
-            <div className={classes.sendMsgBtn} />
+            <div
+              className={classes.sendMsgBtn}
+              onClick={e => onSendBtnClick(e, inputMsg)}
+            />
           </div>
         </div>
       </section>
