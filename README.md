@@ -6,7 +6,7 @@ Under development
 
 #### To do:
 
-1. Add contacts Search field
+1. Add contacts Search field ✅
 2. Add scroll to first unread message
 3. Add dates between messages
 4. Add recipient block to top of chat
