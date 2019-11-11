@@ -6,20 +6,36 @@ import { messages, contacts } from "./mock-data";
 
 class App extends Component {
   state = {
+    contacts: [],
     selectedContact: {
       index: 3,
       messages: messages
     }
   };
 
+  componentDidMount = () => {
+    this.setState({ contacts });
+  };
+
   onContactClick = contactIndex => {
     this.setState({ selectedContact: contactIndex });
   };
 
-  onSendBtnClick = (e, msg) => {
+  onSendBtnClick = (e, value) => {
     e.preventDefault();
 
-    console.log(msg);
+    console.log(value);
+  };
+
+  onContactsFilterChange = value => {
+    const filteredContacts = contacts.filter(contact => {
+      const contactNameLC = contact.name.toLowerCase();
+      const valueLC = value.toLowerCase();
+
+      return contactNameLC.includes(valueLC);
+    });
+
+    this.setState({ contacts: filteredContacts });
   };
 
   render() {
@@ -28,10 +44,11 @@ class App extends Component {
     return (
       <div>
         <ChatContainer
-          contacts={contacts}
+          contacts={this.state.contacts}
           selectedContact={selectedContact}
           onContactClick={this.onContactClick}
           onSendBtnClick={this.onSendBtnClick}
+          onContactsFilterChange={this.onContactsFilterChange}
         />
       </div>
     );

@@ -17,12 +17,20 @@ const styles = {
     overflow: "hidden"
   },
   contacts: {
-    width: "300px",
     display: "flex",
+    width: "300px",
     flexShrink: "0",
-    overflowY: "auto",
     flexDirection: "column",
     borderRight: "1px solid #cecece"
+  },
+  contactsList: {
+    display: "flex",
+    overflowY: "auto",
+    flexDirection: "column",
+    paddingTop: "0"
+  },
+  contactsFilterContainer: {
+    padding: "10px 16px"
   },
   selectedContact: {
     color: "#fff",
@@ -105,7 +113,8 @@ const styles = {
 
 class ChatContainer extends Component {
   state = {
-    inputMsg: ""
+    inputMsg: "",
+    contactsFilter: ""
   };
 
   componentDidMount = () => {
@@ -116,10 +125,18 @@ class ChatContainer extends Component {
     this.messagesEnd.scrollIntoView();
   };
 
-  onInputMsgChange = inputMsg => this.setState({ inputMsg });
+  onChangeField = (field, value) => this.setState({ [field]: value });
+
+  onContactsFilterChange = value => {
+    const { onContactsFilterChange } = this.props;
+
+    this.onChangeField("contactsFilter", value);
+
+    if (onContactsFilterChange) onContactsFilterChange(value);
+  };
 
   render() {
-    const { inputMsg } = this.state;
+    const { inputMsg, contactsFilter } = this.state;
     const {
       classes,
       contacts,
@@ -130,22 +147,33 @@ class ChatContainer extends Component {
 
     return (
       <section className={classes.container}>
-        <List className={classes.contacts}>
-          {contacts.map((contact, contactIndex) => {
-            const isSelected = selectedContact.index === contactIndex;
+        <div className={classes.contacts}>
+          <div className={classes.contactsFilterContainer}>
+            <TextField
+              fullWidth
+              value={contactsFilter}
+              placeholder="Filter contacts..."
+              onChange={e => this.onContactsFilterChange(e.target.value)}
+            />
+          </div>
 
-            return (
-              <Contact
-                contact={contact}
-                classes={classes}
-                key={contactIndex}
-                isSelected={isSelected}
-                onClick={onContactClick}
-                contactIndex={contactIndex}
-              />
-            );
-          })}
-        </List>
+          <List className={classes.contactsList}>
+            {contacts.map((contact, contactIndex) => {
+              const isSelected = selectedContact.index === contactIndex;
+
+              return (
+                <Contact
+                  contact={contact}
+                  classes={classes}
+                  key={contactIndex}
+                  isSelected={isSelected}
+                  onClick={onContactClick}
+                  contactIndex={contactIndex}
+                />
+              );
+            })}
+          </List>
+        </div>
 
         <div className={classes.chatContainer}>
           <div className={classes.chat}>
@@ -184,7 +212,7 @@ class ChatContainer extends Component {
               rowsMax="10"
               value={inputMsg}
               placeholder="Enter your message"
-              onChange={e => this.onInputMsgChange(e.target.value)}
+              onChange={e => this.onChangeField("inputMsg", e.target.value)}
             />
 
             <div
