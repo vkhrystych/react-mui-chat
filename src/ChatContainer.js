@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/styles";
 import Contact from "./components/Contact";
 import Message from "./components/Message";
 
-import { List, TextField } from "@material-ui/core";
+import { List, Divider, TextField } from "@material-ui/core";
 
 import sendIcon from "./assets/send.svg";
 const primaryColor = "#2196f3";
@@ -93,6 +93,19 @@ const styles = {
     borderWidth: "15px 0 0px 16px",
     borderColor: `transparent transparent transparent ${primaryColor}`
   },
+  unreadMsgContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: "13px"
+  },
+  unreadMsgText: {
+    color: "palevioletred"
+  },
+  unreadMsgDivider: {
+    width: "100%",
+    margin: "10px 0px"
+  },
   sendMsgContainer: {
     display: "flex",
     padding: "10px",
@@ -118,7 +131,15 @@ class ChatContainer extends Component {
   };
 
   componentDidMount = () => {
-    this.scrollToBottom();
+    if (this.firstUnreadMsg) {
+      this.scrollToFirstUnreadMsg();
+    } else {
+      this.scrollToBottom();
+    }
+  };
+
+  scrollToFirstUnreadMsg = () => {
+    this.firstUnreadMsg.scrollIntoView();
   };
 
   scrollToBottom = () => {
@@ -140,9 +161,9 @@ class ChatContainer extends Component {
     const {
       classes,
       contacts,
-      selectedContact,
       onContactClick,
-      onSendBtnClick
+      onSendBtnClick,
+      selectedContact
     } = this.props;
 
     return (
@@ -185,15 +206,37 @@ class ChatContainer extends Component {
                   const lastMsg =
                     !nextMsg || (nextMsg && msg.incoming !== nextMsg.incoming);
 
-                  return (
-                    <Message
-                      msg={msg}
-                      key={msgIndex}
-                      classes={classes}
-                      lastMsg={lastMsg}
-                      isNextMsg={nextMsg}
-                    />
-                  );
+                  let firstUnreadMsgIndex;
+
+                  if (firstUnreadMsgIndex === undefined && msg.unread)
+                    firstUnreadMsgIndex = msgIndex;
+
+                  const msgProps = {
+                    msg,
+                    key: msgIndex,
+                    classes,
+                    lastMsg,
+                    isNextMsg: nextMsg
+                  };
+
+                  if (firstUnreadMsgIndex) {
+                    return (
+                      <div
+                        className={classes.unreadMsgContainer}
+                        ref={el => (this.firstUnreadMsg = el)}
+                      >
+                        <span className={classes.unreadMsgText}>
+                          Unread messages
+                        </span>
+
+                        <Divider className={classes.unreadMsgDivider} />
+
+                        <Message {...msgProps} />
+                      </div>
+                    );
+                  }
+
+                  return <Message {...msgProps} />;
                 })
               : null}
 

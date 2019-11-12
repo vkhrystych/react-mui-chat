@@ -373,6 +373,7 @@ export const messages = [
 
   {
     incoming: true,
+    unread: true,
     text:
       "Даже если в HTML файле нет тегов, всегда будет сгенерирован DOM из того что есть, в итоге получим:"
   },
