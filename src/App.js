@@ -41,9 +41,17 @@ class App extends Component {
   render() {
     const { selectedContact } = this.state;
 
+    const chatStyles = {
+      incomingMsgColor: "#e0e0e0",
+      outcomingMsgColor: "#9b38ff",
+      contactsColWidth: "350px",
+      selectedContactColor: "#9b38ff"
+    };
+
     return (
       <div>
         <ChatContainer
+          chatStyles={chatStyles}
           contacts={this.state.contacts}
           selectedContact={selectedContact}
           onContactClick={this.onContactClick}

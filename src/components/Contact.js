@@ -8,10 +8,22 @@ import {
   ListItemAvatar
 } from "@material-ui/core";
 
-export default ({ onClick, contact, classes, isSelected, contactIndex }) => {
+export default ({
+  onClick,
+  contact,
+  classes,
+  isSelected,
+  contactIndex,
+  selectedContactColor
+}) => {
   return (
     <ListItem
       className={`${isSelected ? classes.selectedContact : ""}`}
+      style={{
+        background: `${
+          isSelected && selectedContactColor ? selectedContactColor : ""
+        }`
+      }}
       button
       onClick={() => onClick(contactIndex)}
     >

@@ -161,6 +161,7 @@ class ChatContainer extends Component {
     const {
       classes,
       contacts,
+      chatStyles,
       onContactClick,
       onSendBtnClick,
       selectedContact
@@ -168,7 +169,12 @@ class ChatContainer extends Component {
 
     return (
       <section className={classes.container}>
-        <div className={classes.contacts}>
+        <div
+          className={classes.contacts}
+          style={{
+            width: chatStyles.contactsColWidth
+          }}
+        >
           <div className={classes.contactsFilterContainer}>
             <TextField
               fullWidth
@@ -190,6 +196,7 @@ class ChatContainer extends Component {
                   isSelected={isSelected}
                   onClick={onContactClick}
                   contactIndex={contactIndex}
+                  selectedContactColor={chatStyles.selectedContactColor}
                 />
               );
             })}
@@ -216,7 +223,9 @@ class ChatContainer extends Component {
                     key: msgIndex,
                     classes,
                     lastMsg,
-                    isNextMsg: nextMsg
+                    isNextMsg: nextMsg,
+                    outcomingMsgColor: chatStyles.outcomingMsgColor,
+                    incomingMsgColor: chatStyles.incomingMsgColor
                   };
 
                   if (firstUnreadMsgIndex) {
