@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { withStyles } from "@material-ui/styles";
 
+import moment from "moment";
+
 import Contact from "./components/Contact";
 import Message from "./components/Message";
 
@@ -105,6 +107,11 @@ const styles = {
   unreadMsgDivider: {
     width: "100%",
     margin: "10px 0px"
+  },
+  dateTxt: {
+    fontSize: "14px",
+    color: "#686868",
+    fontWeight: "600"
   },
   sendMsgContainer: {
     display: "flex",
@@ -228,6 +235,13 @@ class ChatContainer extends Component {
                     incomingMsgColor: chatStyles.incomingMsgColor
                   };
 
+                  const msgTime = moment(msg.time);
+                  const nextMsgTime = nextMsg ? moment(nextMsg.time) : moment();
+
+                  const isNeedDate =
+                    msgIndex === 0 ||
+                    moment(msgTime).date() !== nextMsgTime.date();
+
                   if (firstUnreadMsgIndex) {
                     return (
                       <div
@@ -239,6 +253,18 @@ class ChatContainer extends Component {
                         </span>
 
                         <Divider className={classes.unreadMsgDivider} />
+
+                        <Message {...msgProps} />
+                      </div>
+                    );
+                  }
+
+                  if (isNeedDate) {
+                    return (
+                      <div className={classes.unreadMsgContainer}>
+                        <p className={classes.dateTxt}>
+                          {moment(msgTime).format("dddd, MMM DD, YYYY")}
+                        </p>
 
                         <Message {...msgProps} />
                       </div>
