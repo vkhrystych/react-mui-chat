@@ -4,9 +4,9 @@ React chat component, based on [Material-UI framework](https://github.com/mui-or
 
 ### Install
 
-If you use NPM: `npm i tobeor`
+If you use NPM: `npm i react-mui-chat`
 
-If you use Yarn: `yarn add tobeor`
+If you use Yarn: `yarn add react-mui-chat`
 
 ### Requirements
 
