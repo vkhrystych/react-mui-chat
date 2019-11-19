@@ -4,15 +4,11 @@ React chat component, based on [Material-UI framework](https://github.com/mui-or
 
 ### Features
 
-📱 Responsive styles
-
-3️⃣ Contact unread message counter
-
-🖥 Fullscreen and compatible modes
-
-🔥 Automatic scroll to first unread message
-
-⚡️ Automatic scroll to bottom, if contact hasn't unread messages
+- 📱 Responsive styles
+- 3️⃣ Contact unread message counter
+- 🖥 Fullscreen and compatible modes
+- 🔥 Automatic scroll to first unread message
+- ⚡️ Automatic scroll to bottom, if contact hasn't unread messages
 
 ### Requirements
 
