@@ -171,7 +171,8 @@ class ChatContainer extends Component {
       chatStyles,
       onContactClick,
       onSendBtnClick,
-      selectedContact
+      selectedContact,
+      contactsFilterField
     } = this.props;
 
     return (
@@ -182,14 +183,16 @@ class ChatContainer extends Component {
             width: chatStyles.contactsColWidth
           }}
         >
-          <div className={classes.contactsFilterContainer}>
-            <TextField
-              fullWidth
-              value={contactsFilter}
-              placeholder="Filter contacts..."
-              onChange={e => this.onContactsFilterChange(e.target.value)}
-            />
-          </div>
+          {contactsFilterField ? (
+            <div className={classes.contactsFilterContainer}>
+              <TextField
+                fullWidth
+                value={contactsFilter}
+                placeholder="Filter contacts..."
+                onChange={e => this.onContactsFilterChange(e.target.value)}
+              />
+            </div>
+          ) : null}
 
           <List className={classes.contactsList}>
             {contacts.map((contact, contactIndex) => {

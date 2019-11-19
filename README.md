@@ -43,12 +43,13 @@ That's all!
 | onSendBtnClick          | function | On send button click handler                                                                       |
 | showContactsFilterInput | boolean  | Flag for show/hide contacts filter input field                                                     |
 | onContactsFilterChange  | function | Handler, that recieve value of contact filter input                                                |
+| contactsFilterField     | boolean  | Turn on/off contacts filter textfield                                                              |
 
 #### To do:
 
 1. Add contacts Search field ✅
 2. Add scroll to first unread message ✅
-3. Add dates between messages
+3. Add dates between messages ✅ (need fix bug)
 4. Add recipient block to top of chat
 5. Add additional content block for message
 6. Add hotkeys for sending messages

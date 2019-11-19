@@ -51,6 +51,7 @@ class App extends Component {
     return (
       <div>
         <ChatContainer
+          contactsFilterField
           chatStyles={chatStyles}
           contacts={this.state.contacts}
           selectedContact={selectedContact}
