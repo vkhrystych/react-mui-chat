@@ -2,16 +2,24 @@
 
 React chat component, based on [Material-UI framework](https://github.com/mui-org/material-ui)
 
-### Install
+### Features
 
-If you use NPM: `npm i react-mui-chat`
-
-If you use Yarn: `yarn add react-mui-chat`
+📱 Responsive styles
+3️⃣ Contact unread message counter
+🖥 Fullscreen and compatible modes
+🔥 Automatic scroll to first unread message
+⚡️ Automatic scroll to bottom, if contact hasn't unread messages
 
 ### Requirements
 
 - React
 - ES6
+
+### Install
+
+If you use NPM: `npm i react-mui-chat`
+
+If you use Yarn: `yarn add react-mui-chat`
 
 ### Usage
 
@@ -44,6 +52,28 @@ That's all!
 | showContactsFilterInput | boolean  | Flag for show/hide contacts filter input field                                                     |
 | onContactsFilterChange  | function | Handler, that recieve value of contact filter input                                                |
 | contactsFilterField     | boolean  | Turn on/off contacts filter textfield                                                              |
+
+### Styles
+
+You need to pass 'chatStyles' prop (from the table above)
+
+```
+
+<section>
+  <MuiChat chatStyles={{
+    contactsColWidth: '350px',
+    outcomingMsgColor: '#9b38ff',
+  }}>
+</section>
+
+```
+
+| Name                 | Type   | Default   | Description                          |
+| -------------------- | ------ | --------- | ------------------------------------ |
+| incomingMsgColor     | string | "#eee"    | Incoming message background color    |
+| outcomingMsgColor    | string | "#2196f3" | Outcoming message background color   |
+| contactsColWidth     | string | "300px"   | Width of contacts column             |
+| selectedContactColor | string | "#2196f3" | Background color of selected contact |
 
 #### To do:
 
