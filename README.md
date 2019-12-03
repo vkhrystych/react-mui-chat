@@ -79,7 +79,7 @@ You need to pass 'chatStyles' prop (from the table above)
 
 1. Add contacts Search field ✅
 2. Add scroll to first unread message ✅
-3. Add dates between messages ✅ (need fix bug)
+3. Add dates between messages ✅
 4. Add additional content block for message
 5. Add hotkeys for sending messages
 6. Refactoring to npm-package
