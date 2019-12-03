@@ -109,6 +109,7 @@ const styles = {
     margin: "10px 0px"
   },
   dateTxt: {
+    alignSelf: "center",
     fontSize: "14px",
     color: "#686868",
     fontWeight: "600"
@@ -174,6 +175,8 @@ class ChatContainer extends Component {
       selectedContact,
       contactsFilterField
     } = this.props;
+
+    let currentTime = null;
 
     return (
       <section className={classes.container}>
@@ -244,12 +247,12 @@ class ChatContainer extends Component {
                     }`
                   };
 
-                  const msgTime = moment(msg.time);
-                  const nextMsgTime = nextMsg ? moment(nextMsg.time) : moment();
+                  const timeWithDST = moment(msg.time);
 
                   const isNeedDate =
-                    msgIndex === 0 ||
-                    moment(msgTime).date() !== nextMsgTime.date();
+                    moment(currentTime).date() === timeWithDST.date();
+
+                  currentTime = timeWithDST;
 
                   if (firstUnreadMsgIndex) {
                     return (
@@ -258,6 +261,12 @@ class ChatContainer extends Component {
                         ref={el => (this.firstUnreadMsg = el)}
                         className={classes.unreadMsgContainer}
                       >
+                        {!isNeedDate ? (
+                          <p className={classes.dateTxt}>
+                            {moment(msg.time).format("dddd, MMM DD, YYYY")}
+                          </p>
+                        ) : null}
+
                         <span className={classes.unreadMsgText}>
                           Unread messages
                         </span>
@@ -269,22 +278,17 @@ class ChatContainer extends Component {
                     );
                   }
 
-                  if (isNeedDate) {
-                    return (
-                      <div
-                        className={classes.unreadMsgContainer}
-                        key={msgIndex}
-                      >
+                  return (
+                    <div style={{ display: "contents" }}>
+                      {!isNeedDate ? (
                         <p className={classes.dateTxt}>
-                          {moment(msgTime).format("dddd, MMM DD, YYYY")}
+                          {moment(msg.time).format("dddd, MMM DD, YYYY")}
                         </p>
+                      ) : null}
 
-                        <Message {...msgProps} />
-                      </div>
-                    );
-                  }
-
-                  return <Message key={msgIndex} {...msgProps} />;
+                      <Message key={msgIndex} {...msgProps} />
+                    </div>
+                  );
                 })
               : null}
 
