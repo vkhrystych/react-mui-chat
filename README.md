@@ -68,12 +68,12 @@ You need to pass 'chatStyles' prop (from the table above)
 
 ```
 
-| Name                 | Type   | Default   | Description                          |
-| -------------------- | ------ | --------- | ------------------------------------ |
-| incomingMsgColor     | string | "#eee"    | Incoming message background color    |
-| outcomingMsgColor    | string | "#2196f3" | Outcoming message background color   |
-| contactsColWidth     | string | "300px"   | Width of contacts column             |
-| selectedContactColor | string | "#2196f3" | Background color of selected contact |
+| Name                 | Type   | Default | Description                          |
+| -------------------- | ------ | ------- | ------------------------------------ |
+| incomingMsgColor     | string | #eee    | Incoming message background color    |
+| outcomingMsgColor    | string | #2196f3 | Outcoming message background color   |
+| contactsColWidth     | string | 300px   | Width of contacts column             |
+| selectedContactColor | string | #2196f3 | Background color of selected contact |
 
 #### To do:
 

@@ -180,7 +180,7 @@ class ChatContainer extends Component {
         <div
           className={classes.contacts}
           style={{
-            width: chatStyles.contactsColWidth
+            width: `${chatStyles ? chatStyles.contactsColWidth : ""}`
           }}
         >
           {contactsFilterField ? (
@@ -206,7 +206,9 @@ class ChatContainer extends Component {
                   isSelected={isSelected}
                   onClick={onContactClick}
                   contactIndex={contactIndex}
-                  selectedContactColor={chatStyles.selectedContactColor}
+                  selectedContactColor={`${
+                    chatStyles ? chatStyles.selectedContactColor : ""
+                  }`}
                 />
               );
             })}
@@ -234,8 +236,12 @@ class ChatContainer extends Component {
                     classes,
                     lastMsg,
                     isNextMsg: nextMsg,
-                    outcomingMsgColor: chatStyles.outcomingMsgColor,
-                    incomingMsgColor: chatStyles.incomingMsgColor
+                    outcomingMsgColor: `${
+                      chatStyles ? chatStyles.outcomingMsgColor : ""
+                    }`,
+                    incomingMsgColor: `${
+                      chatStyles ? chatStyles.incomingMsgColor : ""
+                    }`
                   };
 
                   const msgTime = moment(msg.time);
@@ -248,8 +254,9 @@ class ChatContainer extends Component {
                   if (firstUnreadMsgIndex) {
                     return (
                       <div
-                        className={classes.unreadMsgContainer}
+                        key={msgIndex}
                         ref={el => (this.firstUnreadMsg = el)}
+                        className={classes.unreadMsgContainer}
                       >
                         <span className={classes.unreadMsgText}>
                           Unread messages
@@ -264,7 +271,10 @@ class ChatContainer extends Component {
 
                   if (isNeedDate) {
                     return (
-                      <div className={classes.unreadMsgContainer}>
+                      <div
+                        className={classes.unreadMsgContainer}
+                        key={msgIndex}
+                      >
                         <p className={classes.dateTxt}>
                           {moment(msgTime).format("dddd, MMM DD, YYYY")}
                         </p>
@@ -274,7 +284,7 @@ class ChatContainer extends Component {
                     );
                   }
 
-                  return <Message {...msgProps} />;
+                  return <Message key={msgIndex} {...msgProps} />;
                 })
               : null}
 
