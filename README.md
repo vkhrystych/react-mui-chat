@@ -75,12 +75,12 @@ You need to pass 'chatStyles' prop (from the table above)
 | contactsColWidth     | string | 300px   | Width of contacts column             |
 | selectedContactColor | string | #2196f3 | Background color of selected contact |
 
-#### To do:
+#### To do (MVP):
 
 1. Add contacts Search field ✅
 2. Add scroll to first unread message ✅
 3. Add dates between messages ✅ (need fix bug)
-4. Add recipient block to top of chat
-5. Add additional content block for message
-6. Add hotkeys for sending messages
-7. Refactoring to npm-package
+4. Add additional content block for message
+5. Add hotkeys for sending messages
+6. Refactoring to npm-package
+7. Add examples of usage
