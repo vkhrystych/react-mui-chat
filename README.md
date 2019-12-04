@@ -52,6 +52,7 @@ That's all!
 | showContactsFilterInput | boolean  | Flag for show/hide contacts filter input field                                                     |
 | onContactsFilterChange  | function | Handler, that recieve value of contact filter input                                                |
 | contactsFilterField     | boolean  | Turn on/off contacts filter textfield                                                              |
+| msgDateFormat           | string   | Moment date formatting string. See more on [Moment docs](https://momentjs.com/docs/#/displaying/)  |
 
 ### Styles
 

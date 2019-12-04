@@ -135,10 +135,15 @@ const styles = {
 class ChatContainer extends Component {
   state = {
     inputMsg: "",
-    contactsFilter: ""
+    contactsFilter: "",
+    msgDateFormat: "ddd, MMM DD, YYYY"
   };
 
   componentDidMount = () => {
+    const { msgDateFormat } = this.props;
+
+    if (msgDateFormat) this.setState({ msgDateFormat });
+
     if (this.firstUnreadMsg) {
       this.scrollToFirstUnreadMsg();
     } else {
@@ -165,7 +170,7 @@ class ChatContainer extends Component {
   };
 
   render() {
-    const { inputMsg, contactsFilter } = this.state;
+    const { inputMsg, contactsFilter, msgDateFormat } = this.state;
     const {
       classes,
       contacts,
@@ -263,7 +268,7 @@ class ChatContainer extends Component {
                       >
                         {!isNeedDate ? (
                           <p className={classes.dateTxt}>
-                            {moment(msg.time).format("dddd, MMM DD, YYYY")}
+                            {moment(msg.time).format(msgDateFormat)}
                           </p>
                         ) : null}
 
@@ -282,7 +287,7 @@ class ChatContainer extends Component {
                     <div style={{ display: "contents" }}>
                       {!isNeedDate ? (
                         <p className={classes.dateTxt}>
-                          {moment(msg.time).format("dddd, MMM DD, YYYY")}
+                          {moment(msg.time).format(msgDateFormat)}
                         </p>
                       ) : null}
 
